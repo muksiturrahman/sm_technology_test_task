@@ -22,27 +22,27 @@ class CustomListTile extends StatelessWidget {
           CurveTween(curve: Curves.easeInOut),
         ),
       ),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        child: Card(
-          elevation: 3.0,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.teal,
-              child: Text(
-                version.id.toString(),
-                style: const TextStyle(color: Colors.white),
-              ),
+      child: Card(
+        elevation: 8.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        shadowColor: Colors.teal,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20.0,),
+          leading: CircleAvatar(
+            backgroundColor: Colors.teal.shade700,
+            child: Text(
+              version.id.toString(),
+              style: const TextStyle(color: Colors.white),
             ),
-            title: Text(
-              version.title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text('ID: ${version.id}'),
-            trailing: const Icon(Icons.arrow_forward_ios, color: Colors.teal),
           ),
+          title: Text(
+            version.title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text('ID: ${version.id}'),
+          trailing: Icon(Icons.arrow_forward_ios, color: Colors.teal.shade700),
         ),
       ),
     );

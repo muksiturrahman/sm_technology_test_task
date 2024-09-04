@@ -54,7 +54,7 @@ class _OutputScreenState extends State<OutputScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'JSON Parser'),
+      appBar: const CustomAppBar(title: 'JSON Parser'),
       body: BackgroundContainer(
         child: Column(
           children: [
@@ -67,31 +67,60 @@ class _OutputScreenState extends State<OutputScreen>
   }
 
   Widget _buildButtonRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          onPressed: () => displayParsedData(parsedVersionsInput1),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.teal,
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Flexible(
+            child: ElevatedButton(
+              onPressed: () => displayParsedData(parsedVersionsInput1),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                backgroundColor: Colors.teal.shade600,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                shadowColor: Colors.black,
+                elevation: 10.0,
+              ),
+              child: const Text(
+                'Parsed Data of Input 1',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
-          child: const Text(
-            'Parsed Data of Input 1',
-            style: TextStyle(color: Colors.white),
+          const SizedBox(width: 10),
+          Flexible(
+            child: ElevatedButton(
+              onPressed: () => displayParsedData(parsedVersionsInput2),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                backgroundColor: Colors.teal.shade600,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                shadowColor: Colors.black,
+                elevation: 10.0,
+              ),
+              child: const Text(
+                'Parsed Data of Input 2',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
-        ),
-        const SizedBox(width: 20),
-        ElevatedButton(
-          onPressed: () => displayParsedData(parsedVersionsInput2),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.teal,
-          ),
-          child: const Text(
-            'Parsed Data of Input 2',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -101,6 +130,7 @@ class _OutputScreenState extends State<OutputScreen>
         valueListenable: currentParsedVersions,
         builder: (context, versions, child) {
           return ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             itemCount: versions.length,
             itemBuilder: (context, index) {
               final Animation<double> animation = CurvedAnimation(
@@ -111,9 +141,12 @@ class _OutputScreenState extends State<OutputScreen>
                   curve: Curves.easeOut,
                 ),
               );
-              return CustomListTile(
-                version: versions[index],
-                animation: animation,
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: CustomListTile(
+                  version: versions[index],
+                  animation: animation,
+                ),
               );
             },
           );
